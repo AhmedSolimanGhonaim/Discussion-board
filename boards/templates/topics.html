@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block title %}{{ board.name }} - Topics
+{%endblock%} {% block content %}
+<div class="container py-4">
+  <div class="row mb-3">
+    <div class="col">
+      <h2>{{ board.name }}</h2>
+      <p class="text-muted">{{ board.description }}</p>
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-primary" type="button">New Topic</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body p-0">
+      <table class="table table-striped table-bordered mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th class="w-50">Topic</th>
+            <th>Starter</th>
+            <th>Replies</th>
+            <th>Views</th>
+            <th>Last Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for topic in board.topics.all %}
+          <tr>
+            <td>{{ topic.subject }}</td>
+            <td>{{ topic.created_by.username }}</td>
+            <td>{{ topic.posts.count }}</td>
+            <td>0</td>
+            <td>{{ topic.last_updated }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center">
+              No topics have been created yet.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

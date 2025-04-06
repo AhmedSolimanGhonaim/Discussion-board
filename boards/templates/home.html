@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Boards - Home
+{% endblock %} {% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1 class="mb-4">Boards</h1>
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>Board</th>
+          <th>Posts</th>
+          <th>Topics</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for board in boards %}
+        <tr>
+          <td>
+            <h5 class="mb-0">
+              <a href="{% url 'board_topics' board.id %}"> {{ board.name }} </a>
+            </h5>
+
+            <small class="text-muted">{{ board.description }}</small>
+          </td>
+          <td>0</td>
+          <td>0</td>
+          <td>No posts yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
