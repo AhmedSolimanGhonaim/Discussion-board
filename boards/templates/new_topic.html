@@ -19,35 +19,8 @@
         </div>
         <div class="card-body">
           <form method="post" novalidate>
-            {% csrf_token %}
-            <div class="mb-3">
-              <label for="subject" class="form-label">Topic Title</label>
-              <input
-                type="text"
-                class="form-control"
-                id="id_subject"
-                name="subject"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea
-                class="form-control"
-                id="id_message"
-                name="message"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <a
-                href="{% url 'board_topics' board.id %}"
-                class="btn btn-outline-secondary me-2"
-                >Cancel</a
-              >
-              <button type="submit" class="btn btn-success">Post Topic</button>
-            </div>
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Post Topic</button>
           </form>
         </div>
       </div>
