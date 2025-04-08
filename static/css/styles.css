@@ -1,0 +1,10 @@
+.nav-item form button.nav-link {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,.55);
+    padding: 8px;
+}
+
+.nav-item form button.nav-link:hover {
+    color: rgba(255,255,255,.75);
+}
