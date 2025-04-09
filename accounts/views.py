@@ -18,3 +18,8 @@ def signup(request):
 @login_required
 def my_profile(request):
     return render(request, 'accounts/my_profile.html')
+@login_required
+def change_password(request):
+
+
+    
