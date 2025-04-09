@@ -19,15 +19,17 @@ Discussion Boards{% endblock %} {% block content %}
             <div class="mb-3">
               {{ field.label_tag }} {% render_field field class="form-control"
               %} {% if field.help_text %}
-              <small class="form-text text-muted">{{ field.help_text }}</small>
+              <small class="form-text text-muted">
+                {{ field.help_text }}
+              </small>
               {% endif %} {% if field.errors %} {% for error in field.errors %}
               <div class="invalid-feedback d-block">{{ error }}</div>
               {% endfor %} {% endif %}
             </div>
             {% endfor %}
-
             <button type="submit" class="btn btn-primary w-100">Login</button>
           </form>
+
           <div class="text-center mt-3">
             <small
               ><a href="#" class="text-muted">Forgot your password?</a></small
