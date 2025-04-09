@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
 
 def signup(request):
@@ -13,3 +14,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
+@login_required
+def my_profile(request):
+    return render(request, 'accounts/my_profile.html')

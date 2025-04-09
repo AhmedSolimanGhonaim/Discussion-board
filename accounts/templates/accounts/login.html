@@ -8,6 +8,12 @@ Discussion Boards{% endblock %} {% block content %}
           <h4 class="mb-0">Login</h4>
         </div>
         <div class="card-body">
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+
           <form method="post" novalidate>
             {% csrf_token %} {% for field in form %}
             <div class="mb-3">
@@ -19,8 +25,14 @@ Discussion Boards{% endblock %} {% block content %}
               {% endfor %} {% endif %}
             </div>
             {% endfor %}
+
             <button type="submit" class="btn btn-primary w-100">Login</button>
           </form>
+          <div class="text-center mt-3">
+            <small
+              ><a href="#" class="text-muted">Forgot your password?</a></small
+            >
+          </div>
         </div>
         <div class="card-footer text-center">
           New to Discussion Boards? <a href="{% url 'signup' %}">Sign up</a>
