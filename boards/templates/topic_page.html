@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% block title %}{{ topic.subject }}
+{% endblock %} 
+{% block content %}
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'board_topics' topic.board.pk %}"
+          >{{ topic.board.name }}</a
+        >
+      </li>
+      <li class="breadcrumb-item active">{{ topic.subject }}</li>
+    </ol>
+  </nav>
+
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">{{ topic.subject }}</h4>
+    </div>
+    {% for post in topic.posts.all %}
+    <div class="card-body border-bottom">
+      <div class="row">
+        <div class="col-md-2 text-center">
+          <img
+            src="{{ post.created_by.profile.avatar.url }}"
+            alt="{{ post.created_by.username }}"
+            class="rounded-circle mb-2"
+            style="width: 80px; height: 80px; object-fit: cover"
+          />
+          <p class="mb-1">
+            <strong>{{ post.created_by.username }}</strong>
+          </p>
+          <small class="text-muted"
+            >Posts: {{ post.created_by.posts.count }}</small
+          >
+        </div>
+        <div class="col-md-10">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <small class="text-muted">Posted {{ post.created_at }}</small>
+            {% if user.is_authenticated and post.created_by == user %}
+            <button class="btn btn-sm btn-outline-primary">Edit</button>
+            {% endif %}
+          </div>
+          {{ post.message }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if user.is_authenticated %}
+  <div class="card">
+    <div class="card-header bg-light">
+      <h5 class="mb-0">Reply to Topic</h5>
+    </div>
+    <div class="card-body">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          <textarea class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Post Reply</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <div class="text-center mt-4">
+    <p class="text-muted">
+      Please <a href="{% url 'login' %}">log in</a> to reply to this topic.
+    </p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -17,8 +17,8 @@ Discussion Boards{% endblock %} {% block content %}
           <form method="post" novalidate>
             {% csrf_token %} {% for field in form %}
             <div class="mb-3">
-              {{ field.label_tag }} {% render_field field class="form-control"
-              %} {% if field.help_text %}
+              {{ field.label_tag }} {% render_field field class="form-control"%}
+               {% if field.help_text %}
               <small class="form-text text-muted">
                 {{ field.help_text }}
               </small>

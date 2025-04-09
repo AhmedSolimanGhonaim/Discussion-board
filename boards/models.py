@@ -17,7 +17,7 @@ class Topic(models.Model):
     last_updated = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User,related_name='topics', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
-    
+    views = models.IntegerField(default=0)
 
     
 
