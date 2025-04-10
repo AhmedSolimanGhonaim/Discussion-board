@@ -10,4 +10,5 @@ urlpatterns = [
     path('boards/<int:id>/new', views.NewTopicView.as_view(), name='new_topic'),
     path('boards/<int:board_id>/topics/<int:topic_id>', views.TopicPageView.as_view(), name='topic_page'),
     path('boards/<int:board_id>/topics/<int:topic_id>/reply', views.ReplyTopicView.as_view(), name='reply_topic'),
+    path('boards/<int:board_id>/topics/<int:topic/id>/edit/posts/<int:post_id>', views.EditPostView.as_view(), name='edit_post'),
 ]

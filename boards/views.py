@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from .forms import NewTopicForm , ReplyForm
 from django.contrib.auth.decorators import login_required 
 from django.utils.decorators import method_decorator
-from django.views.generic import View
-
+from django.views.generic import View ,CreateView
+from django.urls import reverse_lazy
 def home(request):
     boards = Board.objects.all()
    
@@ -124,3 +124,6 @@ class ReplyTopicView(View):
             'topic_reply': topic,
             'form_reply': form
         })
+
+class EditPostView(View):
+    
