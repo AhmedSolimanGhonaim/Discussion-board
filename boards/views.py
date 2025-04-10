@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     boards = Board.objects.all()
+   
     return render(request, 'home.html', {'boards': boards})
 
 def about(request):

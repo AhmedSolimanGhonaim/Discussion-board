@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block title %}Boards - Home
+{% extends 'base.html' %} {% load static %} {% block title %}Boards - Home 
 {% endblock %} {% block content %}
 <div class="row">
   <div class="col-12">
@@ -22,9 +22,9 @@
 
             <small class="text-muted">{{ board.description }}</small>
           </td>
-          <td>0</td>
-          <td>0</td>
-          <td>No posts yet.</td>
+          <td>{{ board.get_post_count }}</td>
+          <td>{{ board.get_topics_count }}</td>
+          <td>{{ board.latest_post }}.</td>
         </tr>
         {% endfor %}
       </tbody>
