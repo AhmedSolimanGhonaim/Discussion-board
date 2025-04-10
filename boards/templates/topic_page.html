@@ -39,11 +39,18 @@
           <div class="d-flex justify-content-between align-items-center mb-2">
             <small class="text-muted">Posted {{ post.created_at }}</small>
             {% if user.is_authenticated and post.created_by == user %}
-            <button class="btn btn-sm btn-outline-primary">Edit</button>
+            <a class="btn btn-sm btn-outline-primary" role="button" href="{% url 'edit_post' post.topic.board.pk post.topic.pk  post.pk%}">Edit</a>
             {% endif %}
           </div>
           {{ post.message }}
+          {% comment %} if updated  {% endcomment %}
+          {% if post.updated_date %}
+          <div class="text-muted">
+            <small>
+              <em>Last updated {{ post.updated_date }}</em>
+            </small>
         </div>
+          {% endif %}
       </div>
     </div>
     {% endfor %}

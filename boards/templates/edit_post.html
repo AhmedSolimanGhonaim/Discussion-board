@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block title %}Edit Post{% endblock %} 
+{% block content %} 
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'board_topics' post.topic.board.pk %}"
+          >{{ post.topic.board.name }}</a
+        >
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'topic_page' post.topic.board.pk post.topic.pk %}"
+          >{{ post.topic.subject }}</a
+        >
+      </li>
+      <li class="breadcrumb-item active">Edit Post</li>
+    </ol>
+  </nav>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Edit Post</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" novalidate>
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a
+              href="{% url 'topic_page' post.topic.board.pk post.topic.pk %}"
+              class="btn btn-outline-secondary"
+              >Cancel</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

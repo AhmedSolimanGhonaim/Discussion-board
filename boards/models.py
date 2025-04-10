@@ -38,7 +38,7 @@ class Post(models.Model):
     created_by = models.ForeignKey(User,related_name='posts', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_by= models.ForeignKey(User,related_name='+', on_delete=models.CASCADE, null=True, blank=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now=False, null=True, blank=True)
     def __str__(self):
         truncated_message = Truncator(self.message)
         return truncated_message.chars(20, truncate='...')

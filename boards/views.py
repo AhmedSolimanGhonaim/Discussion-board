@@ -4,8 +4,9 @@ from .models import Board, Topic, Post
 from django.contrib.auth.models import User
 from .forms import NewTopicForm , ReplyForm
 from django.contrib.auth.decorators import login_required 
-from django.utils.decorators import method_decorator
-from django.views.generic import View ,CreateView
+from django.utils.decorators import method_decorator 
+from django.utils import timezone
+from django.views.generic import View ,CreateView , UpdateView , DeleteView
 from django.urls import reverse_lazy
 def home(request):
     boards = Board.objects.all()
@@ -125,5 +126,32 @@ class ReplyTopicView(View):
             'form_reply': form
         })
 
-class EditPostView(View):
-    
+class EditPostView(UpdateView):
+     model= Post
+     fields = ['message']
+     template_name = 'edit_post.html'
+     pk_url_kwarg = 'post_id'
+     context_object_name = 'post'
+     def form_valid(self,form):
+         post = form.save(commit=False)
+         post.updated_by = self.request.user
+         post.updated_date = timezone.now()
+         post.save()
+         return redirect('topic_page', board_id=post.topic.board.pk, topic_id=post.topic.pk)
+
+ 
+
+
+    #  def get(self,request,board_id,topic_id,post_id):
+    #      post = get_object_or_404(Post, pk = post_id)
+    #      form = ReplyForm()
+    #      return render(request, 'edit_post.html', {'post': post, 'form': form})
+    #  def post(self,request,post_id,board_id,topic_id):
+    #      post = get_object_or_404(Post, pk = post_id)
+    #      form = ReplyForm(request.POST)
+    #      if form.is_valid():
+    #             post.message = form.cleaned_data.get('message')
+    #             post.updated_by = request.user
+    #             post.save()
+    #             return redirect('topic_page', board_id=board_id, topic_id=topic_id)   
+    #      return render(request, 'edit_post.html', {'post': post, 'form': form})
