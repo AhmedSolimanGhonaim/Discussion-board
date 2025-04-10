@@ -41,7 +41,7 @@ A dynamic discussion board platform built with Django that allows users to engag
 ![Home Page](../discussion_board/screenshots/main.jpeg)
 
 ### Discussion Board
-![Discussion Board](../discussion_board/screenshots/2.jpeg)
+![Alt text](../discussion_board/screenshots/2.jpeg)
 
 ## Project Structure
 
