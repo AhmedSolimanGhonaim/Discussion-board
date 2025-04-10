@@ -9,4 +9,5 @@ urlpatterns = [
     path('boards/<int:id>', views.board_topics, name='board_topics'),
     path('boards/<int:id>/new', views.new_topic, name='new_topic'),
     path('boards/<int:board_id>/topics/<int:topic_id>', views.topic_page, name='topic_page'),
+    path('boards/<int:board_id>/topics/<int:topic_id>/reply', views.reply_topic, name='reply_topic'),
 ]

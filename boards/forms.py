@@ -1,5 +1,5 @@
 from django import forms
-from .models import Topic
+from .models import Topic, Post
 
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(
@@ -25,4 +25,16 @@ class NewTopicForm(forms.ModelForm):
                 'id': 'id_subject',
                 'required': 'required'
             }),
+        }
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['message']
+        widgets = {
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'What are your thoughts?'
+            })
         }

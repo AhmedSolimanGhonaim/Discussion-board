@@ -2,7 +2,7 @@ from django.shortcuts import render , get_object_or_404 , redirect
 from django.http import HttpResponse , Http404
 from .models import Board, Topic, Post
 from django.contrib.auth.models import User
-from .forms import NewTopicForm
+from .forms import NewTopicForm , ReplyForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -50,3 +50,18 @@ def topic_page(request,board_id,topic_id):
      topic.views += 1
      topic.save()
      return render(request, 'topic_page.html', {'topic': topic})
+
+@login_required
+def reply_topic(request,board_id,topic_id):
+    topic = get_object_or_404(Topic,board__pk=board_id ,pk=topic_id)
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.topic = topic
+            reply.created_by = request.user
+            reply.save()
+            return redirect('topic_page', board_id=board_id, topic_id=topic_id)
+    else:
+        form = ReplyForm()
+    return render(request, 'reply_topic.html', {'topic_reply': topic, 'form_reply': form})

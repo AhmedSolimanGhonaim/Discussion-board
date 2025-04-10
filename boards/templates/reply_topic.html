@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block title %}Reply to Topic - {{
+topic_reply.subject }}{% endblock %} {% block content %}
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'board_topics' topic_reply.board.pk %}">
+          {{ topic_reply.board.name }}
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'topic_page' topic_reply.board.pk topic_reply.pk %}"
+          >{{ topic_reply.subject }}</a
+        >
+      </li>
+      <li class="breadcrumb-item active">Post a Reply</li>
+    </ol>
+  </nav>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Post a Reply</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" novalidate>
+            {% csrf_token %} {{ form_reply.as_p }}
+            <button type="submit" class="btn btn-success">Post Reply</button>
+            <a
+              href="{% url 'topic_page' topic_reply.board.pk topic_reply.pk %}"
+              class="btn btn-outline-secondary"
+              >Cancel</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

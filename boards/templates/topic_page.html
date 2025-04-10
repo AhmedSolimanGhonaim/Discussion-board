@@ -48,20 +48,21 @@
     </div>
     {% endfor %}
   </div>
+   <a class="btn btn-primary" href="{% url 'reply_topic' topic.board.pk topic.pk %}" type="button">
+ Post a Reply 
+    </a>
 
-  {% if user.is_authenticated %}
+
+
+
+
+{% comment %} {% if user.is_authenticated %}
   <div class="card">
     <div class="card-header bg-light">
       <h5 class="mb-0">Reply to Topic</h5>
     </div>
     <div class="card-body">
-      <form method="post" novalidate>
-        {% csrf_token %}
-        <div class="mb-3">
-          <textarea class="form-control" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Post Reply</button>
-      </form>
+     
     </div>
   </div>
   {% else %}
@@ -70,6 +71,7 @@
       Please <a href="{% url 'login' %}">log in</a> to reply to this topic.
     </p>
   </div>
-  {% endif %}
+  {% endif %}  {% endcomment %}
+
 </div>
 {% endblock %}
